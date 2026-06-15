@@ -5,6 +5,7 @@ Orchestré par Prefect avec validation Soda et tests dbt.
 
 ---
 
+
 ## Stack
 
 | Outil | Rôle |
