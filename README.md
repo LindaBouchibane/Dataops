@@ -103,7 +103,7 @@ dbt test --select marts
 
 ## Connexions
 
-| PostgreSQL | localhost:5433 | dataops / dataops |
-| MinIO Console | http://localhost:9001 | minioadmin / minioadmin |
-| Streamlit | http://localhost:8501 | — |
++ PostgreSQL - localhost:5433 - dataops / dataops
++  MinIO Console - http://localhost:9001 - minioadmin / minioadmin 
++ Streamlit - http://localhost:8501 
 
