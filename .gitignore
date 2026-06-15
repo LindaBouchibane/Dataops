@@ -1,0 +1,26 @@
+# Python
+dbt-env/
+__pycache__/
+*.pyc
+*.pyo
+.python-version
+
+# DuckDB
+warehouse.duckdb
+warehouse.duckdb.wal
+
+# dbt
+dbt_project/target/
+dbt_project/logs/
+target/
+logs/
+dbt_packages/
+
+# Seed output
+seed_output/
+
+# Environment
+.env
+
+# MacOS
+.DS_Store

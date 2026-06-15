@@ -1,0 +1,67 @@
+# Soda schema checks — run BEFORE loading into DuckDB
+# Validates column presence, names, and types on raw staging tables
+# Pipeline is BLOCKED if any check fails
+
+checks for staging.orders:
+  - schema:
+      name: orders_schema_validation
+      fail:
+        when required column missing:
+          - order_id
+          - customer_id
+          - store_id
+          - order_date
+          - status
+        when wrong column type:
+          order_id: varchar
+          customer_id: varchar
+          store_id: varchar
+          order_date: varchar
+          status: varchar
+
+checks for staging.order_items:
+  - schema:
+      name: order_items_schema_validation
+      fail:
+        when required column missing:
+          - item_id
+          - order_id
+          - product_id
+          - quantity
+          - unit_price
+        when wrong column type:
+          item_id: varchar
+          order_id: varchar
+          product_id: varchar
+          quantity: varchar
+          unit_price: varchar
+
+checks for staging.customers:
+  - schema:
+      name: customers_schema_validation
+      fail:
+        when required column missing:
+          - customer_id
+          - country
+          - signup_date
+          - segment
+        when wrong column type:
+          customer_id: varchar
+          country: varchar
+          signup_date: varchar
+          segment: varchar
+
+checks for staging.products:
+  - schema:
+      name: products_schema_validation
+      fail:
+        when required column missing:
+          - product_id
+          - name
+          - category
+          - cost
+        when wrong column type:
+          product_id: varchar
+          name: varchar
+          category: varchar
+          cost: varchar

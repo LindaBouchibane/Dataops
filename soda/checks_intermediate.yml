@@ -1,0 +1,27 @@
+# Soda checks on intermediate layer — run AFTER dbt staging models
+# Validates enriched data before it reaches marts
+# Pipeline is BLOCKED if any check fails
+
+checks for main.int_orders_enriched:
+  - row_count > 0:
+      name: int_orders_not_empty
+  - missing_count(order_id) = 0:
+      name: int_orders_no_missing_order_id
+  - missing_count(customer_id) = 0:
+      name: int_orders_no_missing_customer_id
+  - missing_count(order_date) = 0:
+      name: int_orders_no_missing_order_date
+  - missing_count(country) = 0:
+      name: int_orders_no_missing_country
+  - missing_count(segment) = 0:
+      name: int_orders_no_missing_segment
+  - missing_count(total_amount) = 0:
+      name: int_orders_no_missing_total_amount
+  - missing_count(total_items) = 0:
+      name: int_orders_no_missing_total_items
+  - duplicate_count(order_id) = 0:
+      name: int_orders_unique_order_id
+  - min(total_amount) >= 0:
+      name: int_orders_no_negative_total
+  - min(total_items) >= 0:
+      name: int_orders_no_negative_items

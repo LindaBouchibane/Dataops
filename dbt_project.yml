@@ -1,0 +1,11 @@
+name: 'dataops_lab'
+version: '1.0.0'
+config-version: 2
+
+profile: 'dataops_lab'
+
+model-paths: ["dbt_project/models"]
+
+models:
+  dataops_lab:
+    +materialized: table

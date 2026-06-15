@@ -1,0 +1,4 @@
+data_sources:
+  duckdb:
+    type: duckdb
+    path: /Users/lindabouchibane/Desktop/School - EPSI/2ème année/2nd Semester/Dataops/warehouse.duckdb

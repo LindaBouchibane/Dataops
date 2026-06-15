@@ -1,0 +1,73 @@
+# Soda quality checks — run AFTER loading, BEFORE dbt
+# Validates data quality on raw staging tables
+# Pipeline is BLOCKED if any check fails
+
+checks for staging.orders:
+  - row_count > 0:
+      name: orders_not_empty
+  - missing_count(order_id) = 0:
+      name: orders_no_missing_order_id
+  - missing_count(customer_id) = 0:
+      name: orders_no_missing_customer_id
+  - missing_count(order_date) = 0:
+      name: orders_no_missing_order_date
+  - missing_count(status) = 0:
+      name: orders_no_missing_status
+  - duplicate_count(order_id) = 0:
+      name: orders_unique_order_id
+  - invalid_count(status) = 0:
+      name: orders_valid_status
+      valid values: [pending, shipped, cancelled]
+
+checks for staging.order_items:
+  - row_count > 0:
+      name: order_items_not_empty
+  - missing_count(item_id) = 0:
+      name: order_items_no_missing_item_id
+  - missing_count(order_id) = 0:
+      name: order_items_no_missing_order_id
+  - missing_count(product_id) = 0:
+      name: order_items_no_missing_product_id
+  - missing_count(unit_price) = 0:
+      name: order_items_no_missing_unit_price
+  - missing_count(quantity) = 0:
+      name: order_items_no_missing_quantity
+  - duplicate_count(item_id) = 0:
+      name: order_items_unique_item_id
+
+checks for staging.customers:
+  - row_count > 0:
+      name: customers_not_empty
+  - missing_count(customer_id) = 0:
+      name: customers_no_missing_customer_id
+  - missing_count(country) = 0:
+      name: customers_no_missing_country
+  - missing_count(segment) = 0:
+      name: customers_no_missing_segment
+  - missing_count(signup_date) = 0:
+      name: customers_no_missing_signup_date
+  - duplicate_count(customer_id) = 0:
+      name: customers_unique_customer_id
+  - invalid_count(segment) = 0:
+      name: customers_valid_segment
+      valid values: [retail, enterprise, vip]
+  - invalid_count(country) = 0:
+      name: customers_valid_country
+      valid values: [FR, DE, US, UK, ES]
+
+checks for staging.products:
+  - row_count > 0:
+      name: products_not_empty
+  - missing_count(product_id) = 0:
+      name: products_no_missing_product_id
+  - missing_count(name) = 0:
+      name: products_no_missing_name
+  - missing_count(category) = 0:
+      name: products_no_missing_category
+  - missing_count(cost) = 0:
+      name: products_no_missing_cost
+  - duplicate_count(product_id) = 0:
+      name: products_unique_product_id
+  - invalid_count(category) = 0:
+      name: products_valid_category
+      valid values: [electronics, clothing, sports, home]

@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: staging
+    schema: staging
+    tables:
+      - name: orders
+      - name: order_items
+      - name: customers
+      - name: products
